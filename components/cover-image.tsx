@@ -5,10 +5,11 @@ import Image from 'next/image'
 type Props = {
   title: string
   src: string
-  slug?: string
+  slug?: string,
+  priority?: boolean,
 }
 
-const CoverImage = ({ title, src, slug }: Props) => {
+const CoverImage = ({ title, src, slug, priority=false }: Props) => {
   const image = (
     <Image
       src={src}
@@ -18,6 +19,9 @@ const CoverImage = ({ title, src, slug }: Props) => {
       })}
       width={1300}
       height={630}
+      quality={70}
+      sizes="(max-width: 768px) 95vw, (max-width: 1200px) 95vw, 95vw"
+      priority={priority}
     />
   )
   return (
