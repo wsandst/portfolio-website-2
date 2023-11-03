@@ -1,18 +1,18 @@
-import fs from 'fs'
-import { join } from 'path'
-import matter from 'gray-matter'
+import fs from 'fs';
+import { join } from 'path';
+import matter from 'gray-matter';
+import lodash from 'lodash';
 
-const postsDirectory = join(process.cwd(), '_posts')
+const postsDirectory = join(process.cwd(), 'content/project')
 
-export function getPostSlugs() {
-  return fs.readdirSync(postsDirectory)
+export function getPostPaths() {
+  return fs.readdirSync(postsDirectory);
 }
 
-export function getPostBySlug(slug: string, fields: string[] = []) {
-  const realSlug = slug.replace(/\.md$/, '')
-  const fullPath = join(postsDirectory, `${realSlug}.md`)
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
-  const { data, content } = matter(fileContents)
+export function getPost(path: string, fields: string[] = []) {
+  const fullPath = join(postsDirectory, path);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const { data, content } = matter(fileContents);
 
   type Items = {
     [key: string]: string
@@ -23,7 +23,7 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
   // Ensure only the minimal needed data is exposed
   fields.forEach((field) => {
     if (field === 'slug') {
-      items[field] = realSlug
+      items[field] = lodash.kebabCase(data['title']);
     }
     if (field === 'content') {
       items[field] = content
@@ -38,10 +38,10 @@ export function getPostBySlug(slug: string, fields: string[] = []) {
 }
 
 export function getAllPosts(fields: string[] = []) {
-  const slugs = getPostSlugs()
+  const slugs = getPostPaths();
   const posts = slugs
-    .map((slug) => getPostBySlug(slug, fields))
+    .map((path) => getPost(path, fields))
     // sort posts by date in descending order
-    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1))
-  return posts
+    .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
+  return posts;
 }
