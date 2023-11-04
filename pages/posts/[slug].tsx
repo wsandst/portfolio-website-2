@@ -35,11 +35,11 @@ export default function Post({ post, morePosts, preview }: Props) {
             <article className="mb-32">
               <Head>
                 <title>{title}</title>
-                <meta property="og:image" content={post.ogImage.url} />
+                <meta property="og:image" content={post.cover} />
               </Head>
               <PostHeader
                 title={post.title}
-                coverImage={post.coverImage}
+                cover={post.cover}
                 date={post.date}
                 author={post.author}
               />
@@ -59,14 +59,13 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPostBySlug(params.slug, [
+  const post = getPost(params.slug, [
     'title',
     'date',
     'slug',
     'author',
     'content',
-    'ogImage',
-    'coverImage',
+    'cover',
   ])
   const content = await markdownToHtml(post.content || '')
 

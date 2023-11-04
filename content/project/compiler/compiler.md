@@ -1,6 +1,6 @@
 ---
 title: "Self-Hosting C Compiler"
-cover: "./compiler-cover.jpg"
+cover: "compiler-cover.jpg"
 date: "2021-09-09"
 tags:
     - c
@@ -16,3 +16,4 @@ github: "https://github.com/wsandst/c-compiler-in-c"
 download: ""
 authors: ""
 ---
+Hello there
