@@ -1,11 +1,13 @@
 import PostPreview from './post-preview'
 import type Post from '../interfaces/post'
+import { Project } from '../../tina/__generated__/types'
 
 type Props = {
-  posts: Post[]
+  posts: Project[]
 }
 
 const MoreStories = ({ posts }: Props) => {
+  console.log("Posts:", posts);
   return (
     <section>
       <h2 className="mb-8 text-5xl md:text-7xl font-bold tracking-tighter leading-tight">
@@ -18,7 +20,7 @@ const MoreStories = ({ posts }: Props) => {
             title={post.title}
             cover={post.cover}
             date={post.date}
-            author={post.author}
+            author={post.authors}
             slug={post.slug}
             description={post.description}
           />

@@ -11,19 +11,32 @@ import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
 import markdownToHtml from '../../lib/markdownToHtml'
 import type PostType from '../../interfaces/post'
+import client from '../../../tina/__generated__/client';
+import { ProjectQuery } from '../../../tina/__generated__/types'
+import { useTina } from 'tinacms/dist/react';
+import { staticRequest } from 'tinacms'
+import { TinaMarkdown } from 'tinacms/dist/rich-text'
 
 type Props = {
-  post: PostType
-  morePosts: PostType[]
+  post: {
+      data: any;
+      query: string;
+      variables: {}
+  };
   preview?: boolean
 }
 
-export default function Post({ post, morePosts, preview }: Props) {
+export default function Post({ post, preview}: Props) {
+  const {data} = useTina(post);
+  const project = data.projectConnection.edges[0].node;
+
   const router = useRouter()
-  const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`
-  if (!router.isFallback && !post?.slug) {
+  const title = `${project.title} | Next.js Blog Example with ${CMS_NAME}`
+  if (!router.isFallback && !project.slug) {
     return <ErrorPage statusCode={404} />
   }
+
+
   return (
     <Layout preview={preview}>
       <Container>
@@ -35,15 +48,15 @@ export default function Post({ post, morePosts, preview }: Props) {
             <article className="mb-32">
               <Head>
                 <title>{title}</title>
-                <meta property="og:image" content={post.cover} />
+                <meta property="og:image" content={project.cover} />
               </Head>
               <PostHeader
-                title={post.title}
-                cover={post.cover}
-                date={post.date}
-                author={post.author}
+                title={project.title}
+                cover={project.cover}
+                date={project.date}
+                author={project.authors}
               />
-              <PostBody content={post.content} />
+              <PostBody content={project.body} />
             </article>
           </>
         )}
@@ -59,22 +72,45 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPost(params.slug, [
-    'title',
-    'date',
-    'slug',
-    'author',
-    'content',
-    'cover',
-  ])
-  const content = await markdownToHtml(post.content || '')
+  console.log("Params: ", params);
 
+  const query = `
+    query {
+      projectConnection(
+        filter: {slug: {eq: "${params.slug}"}},
+        first: 1
+      ) {
+        edges {
+          node {
+            __typename
+            title
+            cover
+            slug
+            date
+            description
+            aim
+            authors
+            github
+            body
+          }
+        }
+      }
+    }
+  `;
+
+  const projectResponse : any = await staticRequest({
+    query,
+    variables: {}
+    },
+  );
+  
   return {
     props: {
       post: {
-        ...post,
-        content,
-      },
+        data: projectResponse,
+        query: query,
+        variables: {}
+      }
     },
   }
 }

@@ -2,12 +2,13 @@ import Avatar from './avatar'
 import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
+import { TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text'
 
 type Props = {
   title: string
   cover: string
   date: string
-  description: string
+  description: TinaMarkdownContent
   author: string
   slug: string
 }
@@ -41,7 +42,9 @@ const HeroPost = ({
           </div>
         </div>
         <div>
-          <p className="text-lg leading-relaxed mb-4">{description}</p>
+          <div className="text-lg leading-relaxed mb-4">
+            <TinaMarkdown content={description} />
+          </div>
           <p> {author} </p>
         </div>
       </div>

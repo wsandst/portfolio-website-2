@@ -1,14 +1,29 @@
 
 html {
-    width: 100vh;
+    width: 100%;
+    background-color: #202020;
+    color: white;
+    margin: 0;
 }
 
 body {
     width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#__next {
     margin: 1em;
+    max-width: 800px;
 }
 
 img {
     max-width: 90%;
     object-fit: contain;
+}
+
+a {
+    color: #6ab0f3;
 }

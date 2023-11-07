@@ -7,14 +7,22 @@ import { getAllPosts } from '../lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
 import Post from '../interfaces/post'
+import { staticRequest } from 'tinacms'
+import { useTina } from 'tinacms/dist/react'
 
 type Props = {
-  allPosts: Post[]
+  posts: {
+    data: any;
+    query: string;
+    variables: {}
+  };
 }
 
-export default function Index({ allPosts }: Props) {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+export default function Index({ posts }: Props) {
+  const {data} = posts;
+  const heroPost = data.projectConnection.edges[0].node;
+  const morePosts = data.projectConnection.edges.slice(1).map(edge => edge.node);
+
   return (
     <>
       <Layout>
@@ -41,16 +49,41 @@ export default function Index({ allPosts }: Props) {
 }
 
 export const getStaticProps = async () => {
-  const allPosts = getAllPosts([
-    'title',
-    'date',
-    'slug',
-    'author',
-    'cover',
-    'description',
-  ])
+  //const result = await client.queries.project;
+  const query = `
+    query {
+      projectConnection {
+        edges {
+          node {
+            __typename
+            title
+            cover
+            slug
+            date
+            description
+            aim
+            authors
+            github
+            body
+          }
+        }
+      }
+    }
+  `;
+
+  const projectsListData : any = await staticRequest({
+    query,
+    variables: {}
+    },
+  );
 
   return {
-    props: { allPosts },
+    props: {
+      posts: {
+        data: projectsListData,
+        query: query,
+        variables: {}
+      }
+    },
   }
 }

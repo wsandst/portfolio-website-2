@@ -31,8 +31,11 @@ export function getPost(slug: string, fields: string[] = []) {
     else if (field === 'content') {
       items[field] = content;
     }
-    else if (field == 'cover') {
+    else if (field == 'cover' && data['cover'].startsWith("./")) {
       items[field] = `/assets/projects/${slug}/${data['cover']}`;
+    }
+    else if (field == 'date') {
+      items[field] = JSON.stringify(data[field]);
     }
     else if (typeof data[field] !== 'undefined') {
       items[field] = data[field];
@@ -43,6 +46,15 @@ export function getPost(slug: string, fields: string[] = []) {
 }
 
 export function getAllPosts(fields: string[] = []) {
+  /*const postListResponse = await client.queries.projectConnection();
+  console.log(postListResponse.data.projectConnection.edges);
+  var result =  {
+    paths: postListResponse.data.projectConnection.edges.map((page) => ({
+      params: { filename: page.node._sys.filename },
+    })),
+    fallback: 'blocking',
+  }
+  console.log(result);*/
   const slugs = getPostPaths();
   const posts = slugs
     .map((slug) => getPost(slug, fields))

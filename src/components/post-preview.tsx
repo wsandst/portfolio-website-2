@@ -2,12 +2,13 @@ import Avatar from './avatar'
 import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
+import { TinaMarkdown, TinaMarkdownContent } from 'tinacms/dist/rich-text'
 
 type Props = {
   title: string
   cover: string
   date: string
-  description: string
+  description: TinaMarkdownContent
   author: string
   slug: string
 }
@@ -37,10 +38,10 @@ const PostPreview = ({
       <div className="text-lg mb-4">
         <DateFormatter dateString={date} />
       </div>
-      <p className="text-lg leading-relaxed mb-4">{description}</p>
+      <TinaMarkdown content={description}/>
       <p>{author} </p>
     </div>
-  )
+  );
 }
 
 export default PostPreview
