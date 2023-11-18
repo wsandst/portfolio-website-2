@@ -15,5 +15,6 @@ aim: "The aim of this project was to learn compiler construction, better underst
 github: "https://github.com/wsandst/c-compiler-in-c"
 download: ""
 authors: ""
+slug: "compiler"
 ---
 Hello there

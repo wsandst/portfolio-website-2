@@ -1,0 +1,18 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+media_folder: public/img
+public_folder: public
+local_backend: true
+collections:
+  - name: "projects"
+    label: "Projects"
+    label_singular: 'Project'
+    folder: "content/projects"
+    create: true
+    path: "{{slug}}/{{slug}}.md"
+    fields:
+      - { label: "Title", name: "title", widget: "string"}
+      - { label: "slug", name: "slug", widget: "string"}
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown"}

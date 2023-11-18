@@ -3,7 +3,7 @@ import { join } from 'path';
 import matter from 'gray-matter';
 import lodash from 'lodash';
 
-const postsDirectory = join(process.cwd(), 'content/project')
+const postsDirectory = join(process.cwd(), 'content/projects')
 
 export function getPostPaths() {
   return fs.readdirSync(postsDirectory);

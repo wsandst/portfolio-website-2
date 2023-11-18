@@ -10,7 +10,7 @@ const fsExtra = require('fs-extra');
 
 const fsPromises = fs.promises;
 const targetDir = './public/assets/projects';
-const postsDir = './content/project';
+const postsDir = './content/projects';
 
 // Copy over images for a specific slug to public
 async function copyImagesToPublic(images, slug) {
