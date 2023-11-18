@@ -72,7 +72,6 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  console.log("Params: ", params);
 
   const query = `
     query {
