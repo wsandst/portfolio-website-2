@@ -1,0 +1,384 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Introductory Python Tutorial</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="INTRO.html">Introduction</a></li><li class="chapter-item expanded "><a href="chapter-1-setup.html"><strong aria-hidden="true">1.</strong> Installation and setup</a></li><li class="chapter-item expanded "><a href="chapter-2-basics.html"><strong aria-hidden="true">2.</strong> Basics</a></li><li class="chapter-item expanded "><a href="chapter-3-if.html"><strong aria-hidden="true">3.</strong> If statements</a></li><li class="chapter-item expanded "><a href="chapter-4-loops.html"><strong aria-hidden="true">4.</strong> Strings and while loops</a></li><li class="chapter-item expanded "><a href="chapter-5-lists.html"><strong aria-hidden="true">5.</strong> Loops and lists</a></li><li class="chapter-item expanded "><a href="chapter-6-functions.html"><strong aria-hidden="true">6.</strong> Functions</a></li><li class="chapter-item expanded "><a href="chapter-7-advanced.html"><strong aria-hidden="true">7.</strong> Advanced</a></li><li class="chapter-item expanded "><a href="chapter-8-hangman.html"><strong aria-hidden="true">8.</strong> Project - Hangman</a></li><li class="chapter-item expanded "><a href="chapter-9-imports.html"><strong aria-hidden="true">9.</strong> Imports, libraries and files</a></li><li class="chapter-item expanded "><a href="final-project.html"><strong aria-hidden="true">10.</strong> Final project - Snake with PyGame</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Introductory Python Tutorial</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction"><a class="header" href="#introduction">Introduction</a></h1>
+<div class="box tip">
+  <p class="box-title"> 
+    POEM
+  </p>
+  <p> 
+    In the world of beats and melodies, <br>
+    A singer sought new harmonies. <br>
+    Python's code, a language unknown, <br>
+    They embraced with a spirit of their own. <br> <br>
+    From verses to loops, they took the stride, <br>
+    Syntax and rhythm began to collide. <br>
+    A producer's flair and coder's grace, <br>
+    In this fusion of talents, they found their place. <br> <br>
+    Through errors and trials, they persevered,<br>
+    With each bug conquered, they cheered.<br>
+    A snake game was born, a masterpiece grand,<br>
+    Crafted by their skillful hand.<br> <br>
+    By ChatGPT
+  </p>
+</div>
+<br>
+Welcome! Are you completely new to programming and does your name start with E? Then this tutorial is made for you - literally! 
+<p>The aim is to take you from a complete beginner to a Python pro, in a short amount of time. To prove your Python mastery at the end, you will be tasked with creating a Snake game from scratch. Sounds like fun! Good luck 😎</p>
+<h2 id="tutorial-structure"><a class="header" href="#tutorial-structure">Tutorial structure</a></h2>
+<p>On the left hand side, you will find a list of tutorial chapters. Each chapter introduces new concepts and provides suitable problems for practising. The problems are designed to be used in conjunction with real life tutoring - there is not enough information solely in this course to learn Python from scratch.</p>
+<p>Some of the problems have a provided solution which can be viewed. To maximize your learning, you should not view these solutions before trying your best to solve the problem at hand. Even if you cannot figure it out right away, think for a while or ask your tutor before you move on to viewing the actual solution.</p>
+<h2 id="using-this-document"><a class="header" href="#using-this-document">Using this document</a></h2>
+<p>In the top navigation bar, you will find a series of icons.</p>
+<p>By clicking on the <i class="fa fa-bars"></i> icon you will toggle an interactive table of contents to navigate the document. You can also use <kbd>→</kbd> and <kbd>←</kbd> keys on your keyboard to go to the following and previous page.</p>
+<p>The <i class="fa fa-paint-brush"></i> lets you choose among 5 different themes and color schemes to please your reading experience.</p>
+<p>You can search anywhere by pressing <kbd>s</kbd> on your keyboard or clicking the <i class="fa fa-search"></i> icon.</p>
+<p>A <a href="print.html">printable</a> versions of this document is also available.</p>
+<p><br><br></p>
+<p align="center">
+  <img src="images/python.png" />
+</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="installation-and-setup"><a class="header" href="#installation-and-setup">Installation and setup</a></h1>
+<p>You already did this 😎</p>
+<h2 id="summary"><a class="header" href="#summary">Summary:</a></h2>
+<p>Install Python, Visual Studio Code and Git Bash</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="basics"><a class="header" href="#basics">Basics</a></h1>
+<p>You already did this 😎</p>
+<h2 id="summary-1"><a class="header" href="#summary-1">Summary:</a></h2>
+<p>Learned concepts:</p>
+<ul>
+<li>
+<p>Printing text to the terminal using <code>print</code></p>
+</li>
+<li>
+<p>Storing values in variables, ex <code>a = 3</code></p>
+</li>
+<li>
+<p>Adding, subtracting, multiplying and diving numbers and variables.<br />
+Ex. <code>c = a + b</code> or <code>c = 3 + b</code></p>
+</li>
+<li>
+<p>Getting input from a user using <code>input()</code></p>
+</li>
+<li>
+<p>Variable types. Variables can have different types, such as:</p>
+<ul>
+<li><strong>int</strong> - Integers (heltal)</li>
+<li><strong>string</strong> - Strings (text)</li>
+<li><strong>float</strong> - decimal numbers</li>
+<li><strong>bool</strong> - boolean value, can be True or False</li>
+</ul>
+</li>
+<li>
+<p>Types can be converted to other types, ex <code>int(&quot;3&quot;)</code> converts &quot;3&quot; to an integer.</p>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="if-statements"><a class="header" href="#if-statements">If statements</a></h1>
+<p>You already did this 😎</p>
+<h2 id="summary-2"><a class="header" href="#summary-2">Summary:</a></h2>
+<p>Learned concepts</p>
+<ul>
+<li><strong>bool</strong> (boolean) types. </li>
+<li>Comparing numbers using comparisons to produce True or False values. These can be used in if-statements.
+<ul>
+<li><strong>a &gt; b</strong> = a is greater than b</li>
+<li><strong>a &lt; b</strong> = a is less than b</li>
+<li><strong>a &gt;= b</strong> = a is greater than or equal to b</li>
+<li><strong>a &lt;= b</strong> = a is less than or equal to b</li>
+<li><strong>a == b</strong> = a is equal to b</li>
+<li><strong>a != b</strong> = a is not equal to b</li>
+<li><strong>a or b</strong> = a or b</li>
+<li><strong>a and b</strong> &lt;=&gt; a and b </li>
+<li><strong>not a</strong> = not a</li>
+</ul>
+</li>
+<li><strong>If</strong> statements can be used to run some code based on a condition. By adding an <strong>elif</strong> statement afterwards, another if statement can be checked, if the first one is incorrect. An <strong>else</strong> statement will run if the previous if statement condition was false.</li>
+</ul>
+<h2 id="example-program-with-if-statements"><a class="header" href="#example-program-with-if-statements">Example program with if statements</a></h2>
+<pre><code class="language-python">name = input(&quot;Enter your name: &quot;)
+if name == &quot;william&quot;:
+    print(&quot;That's a very cool name!&quot;)
+elif name == &quot;elin&quot; or name == &quot;harald&quot;:
+    print(&quot;That's an even cooler name!&quot;)
+else:
+    print(&quot;Your name is not very cool&quot;)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="strings-and-while-loops"><a class="header" href="#strings-and-while-loops">Strings and while loops</a></h1>
+<p>In this lesson, you will learn about some more advanced string (text) functionality. You will also learn how to use while loops, which allows your program to repeat, based on a condition. This is very useful, as you'll soon see.</p>
+<h2 id="already-completed"><a class="header" href="#already-completed">Already completed</a></h2>
+<ol>
+<li>Experiment with using <code>startswith</code>, <code>endswith</code>, <code>lower</code> and <code>upper</code> to improve the checking of strings. Make a program which determines if last name is Sandström or first name is William. The program shouldn't care about big or small letters. </li>
+<li>Using while loops, add numbers given from a user until they enter a negative number. At this point, you should print the sum.</li>
+</ol>
+<h2 id="enter-the-secret-password"><a class="header" href="#enter-the-secret-password">Enter the secret password</a></h2>
+<p>In this exercise, you will create a program which repeatedly asks a user for password.
+You will successively add more functionality to the program.</p>
+<p><strong>Part 1:</strong> Make a program which asks a user for a secret password. If the password is correct,
+tell them a supersecret phrase of your choosing.</p>
+<p><strong>Part 2:</strong>  If the user types quit or exit, the program should exit without saying the supersecret phrase.</p>
+<p><strong>Part 3:</strong>  The user should only have 3 attempts to type in the password. If they exceed this amount of attempts, the program should exit.</p>
+<details>
+  <summary>Part 1 Example Solution</summary>
+<pre><code class="language-python">  password = input(&quot;Please enter the secret password: &quot;)
+  while password != &quot;supersecretpassword&quot;:
+      print(&quot;Incorrect password! Try again&quot;)
+      password = input(&quot;Please enter the secret password: &quot;)
+  print(&quot;You entered the correct password, good job! :D&quot;)
+</code></pre>
+</details>  
+<details>
+  <summary>Part 2 Example Solution</summary>
+<pre><code class="language-python">  password = input(&quot;Please enter the secret password: &quot;)
+  while password != &quot;supersecretpassword&quot; and password != &quot;quit&quot; and password != &quot;exit&quot;:
+      print(&quot;Incorrect password! Try again&quot;)
+      password = input(&quot;Please enter the secret password: &quot;)
+
+  if password == &quot;supersecretpassword&quot;:
+      print(&quot;You entered the correct password, good job! :D&quot;)
+  else:
+      print(&quot;Bye bye, sucker&quot;)
+</code></pre>
+</details>  
+<details>
+  <summary>Part 3 Example Solution</summary>
+<pre><code class="language-python">  password = input(&quot;Please enter the secret password: &quot;)
+  tries_left = 2
+  while password != &quot;supersecretpassword&quot; and password != &quot;quit&quot; and password != &quot;exit&quot; and tries_left &gt; 0:
+      print(&quot;Incorrect password! Try again&quot;)
+      password = input(&quot;Please enter the secret password: &quot;)
+      tries_left = tries_left - 1
+
+  if password == &quot;supersecretpassword&quot;:
+      print(&quot;You entered the correct password, good job! :D&quot;)
+  elif tries_left = 0:
+      print(&quot;Too many failed attempts!&quot;)
+  else:
+      print(&quot;Bye bye, sucker&quot;)
+</code></pre>
+</details>  
+<br>
+<div class="box tip">
+  <p> 
+    Can you solve this differently using 'break'? Are there any benefits or drawbacks to doing it this way?
+  </p>
+</div>
+<p><br></br></p>
+<h2 id="modify-your-shopping-program"><a class="header" href="#modify-your-shopping-program">Modify your shopping program</a></h2>
+<p>Copy your impressive Hemmakväll shopping program from the previous lesson. Use your newfound knowledge of loops to improve this program so that if the user attempts to shop something else than beer, cigg or energy drinks, the program will tell them they're stupid and ask them to enter a shopping item again.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="loops-and-lists"><a class="header" href="#loops-and-lists">Loops and lists</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="functions"><a class="header" href="#functions">Functions</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="advanced"><a class="header" href="#advanced">Advanced</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="project---hangman"><a class="header" href="#project---hangman">Project - Hangman</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="imports-libraries-and-files"><a class="header" href="#imports-libraries-and-files">Imports, libraries and files</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="final-project---snake-with-pygame"><a class="header" href="#final-project---snake-with-pygame">Final project - Snake with PyGame</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>

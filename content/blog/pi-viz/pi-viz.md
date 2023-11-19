@@ -2,7 +2,7 @@
 title: "Visualizing 100 Million Digits of Pi"
 cover: "./pi-viz-cover.png"
 date: "2020-02-13"
-slug: "pi-viz"
+slug: "visualizing-digits-of-pi"
 tags:
     - pi
     - python

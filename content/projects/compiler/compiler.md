@@ -1,5 +1,6 @@
 ---
 title: Self-Hosting C Compiler
+slug: compiler
 cover: compiler-cover.jpg
 date: 2021-09-09
 tags:
@@ -20,6 +21,5 @@ aim: >
   understand x86-64 assembly and do a deep-dive into the C language.
 github: https://github.com/wsandst/c-compiler-in-c
 authors: []
-slug: compiler
 ---
 Hello there
