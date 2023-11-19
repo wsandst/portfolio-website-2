@@ -6,7 +6,8 @@
     "start": "next start",
     "typecheck": "tsc",
     "copyimages": "node ./scripts/copy-images.ts",
-    "prebuild": "npm run copyimages"
+    "prebuild": "npm run copyimages",
+    "cms": "npx @staticcms/proxy-server"
   },
   "dependencies": {
     "classnames": "^2.3.1",

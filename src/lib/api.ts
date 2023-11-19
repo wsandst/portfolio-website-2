@@ -34,6 +34,9 @@ export function getPost(slug: string, fields: string[] = []) {
     else if (field == 'cover') {
       items[field] = `/assets/projects/${slug}/${data['cover']}`;
     }
+    else if (field == 'date') {
+      items[field] = JSON.stringify(data[field]);
+    }
     else if (typeof data[field] !== 'undefined') {
       items[field] = data[field];
     }

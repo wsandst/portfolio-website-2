@@ -1,7 +1,7 @@
 backend:
   name: git-gateway
   branch: main # Branch to update (optional; defaults to master)
-media_folder: public/img
+media_folder: public/assets
 public_folder: public
 local_backend: true
 collections:
@@ -13,6 +13,58 @@ collections:
     path: "{{slug}}/{{slug}}.md"
     fields:
       - { label: "Title", name: "title", widget: "string"}
-      - { label: "slug", name: "slug", widget: "string"}
-      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "URL Slug", name: "slug", widget: "string"}
+      - { label: "Cover Image", name: "cover", widget: "image"}
+      - { label: "Project Date", name: "date", widget: "datetime", format: "yyyy-MM-dd" }
+      - label: Tags
+        name: tags
+        widget: list
+        fields:
+          - {label: Tag, name: tag, widget: string}
+      - { label: "Authors", name: "authors", widget: "list" } 
+      - { label: "Description", name: "description", widget: "markdown"}
+      - { label: "Aim", name: "aim", widget: "markdown"}
       - { label: "Body", name: "body", widget: "markdown"}
+
+  - name: "blog"
+    label: "Blog Posts"
+    label_singular: 'Blog Post'
+    folder: "content/blog"
+    create: true
+    path: "{{slug}}/{{slug}}.md"
+    fields:
+      - { label: "Title", name: "title", widget: "string"}
+      - { label: "URL Slug", name: "slug", widget: "string"}
+      - { label: "Cover Image", name: "cover", widget: "image"}
+      - { label: "Project Date", name: "date", widget: "datetime", format: "yyyy-MM-dd" }
+      - label: Tags
+        name: tags
+        widget: list
+        fields:
+          - {label: Tag, name: tag, widget: string}
+      - { label: "Authors", name: "authors", widget: "list" } 
+      - { label: "Body", name: "body", widget: "markdown"}
+
+  - name: "pages"
+    label: "Pages"
+    label_singular: 'Page'
+    files:
+      - label: "Home Page"
+        name: "index"
+        file: "content/pages/index.md"
+        fields:
+          - { label: About Heading, name: about-heading, widget: string}
+          - { label: About Text, name: about-text, widget: markdown}
+          - { label: About Image, name: about-image, widget: image}
+          
+      - label: "About Page"
+        name: "about"
+        file: "content/pages/about.md"
+        fields:
+          - label: Sections
+            name: sections
+            widget: list
+            fields:
+              - {label: Title, name: title, widget: string}
+              - {label: Image, name: image, widget: image}
+              - {label: Text, name: text, widget: markdown}
