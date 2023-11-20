@@ -5,20 +5,19 @@ import PostBody from '../../components/post-body'
 import Header from '../../components/header'
 import PostHeader from '../../components/post-header'
 import Layout from '../../components/layout'
-import { getPost, getAllPosts } from '../../lib/api'
+import { getProject, getProjects } from '../../lib/content-api'
 import PostTitle from '../../components/post-title'
 import Head from 'next/head'
 import { CMS_NAME } from '../../lib/constants'
-import markdownToHtml from '../../lib/markdownToHtml'
-import type PostType from '../../interfaces/post'
+import type Project from '../../interfaces/project'
+import { serialize } from 'next-mdx-remote/serialize'
 
 type Props = {
-  post: PostType
-  morePosts: PostType[]
+  post: Project
   preview?: boolean
 }
 
-export default function Post({ post, morePosts, preview }: Props) {
+export default function Post({ post, preview }: Props) {
   const router = useRouter()
   const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`
   if (!router.isFallback && !post?.slug) {
@@ -41,9 +40,9 @@ export default function Post({ post, morePosts, preview }: Props) {
                 title={post.title}
                 cover={post.cover}
                 date={post.date}
-                author={post.author}
+                author={post.authors.length == 0 ? "Me" : post.authors[0]}
               />
-              <PostBody content={post.content} />
+              <PostBody content={post.description} />
             </article>
           </>
         )}
@@ -59,28 +58,30 @@ type Params = {
 }
 
 export async function getStaticProps({ params }: Params) {
-  const post = getPost(params.slug, [
+  const post = await getProject(params.slug, [
     'title',
     'date',
     'slug',
-    'author',
-    'content',
+    'authors',
+    'description',
+    'aim',
+    'body',
     'cover',
   ])
-  const content = await markdownToHtml(post.content || '')
+
+  post['description'] = await serialize(post['description']);
+  post['aim'] = await serialize(post['aim']);
+  post['body'] = await serialize(post['body']);
 
   return {
     props: {
-      post: {
-        ...post,
-        content,
-      },
+      post: post
     },
   }
 }
 
 export async function getStaticPaths() {
-  const posts = getAllPosts(['slug'])
+  const posts = await getProjects(['slug'])
 
   return {
     paths: posts.map((post) => {

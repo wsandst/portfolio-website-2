@@ -1,6 +1,6 @@
 ---
 title: Magnificence 2, a modern UCI Chess Engine
-slug: magnificence2
+slug: magnificence-2
 cover: ./magnificence-2-cover.jpg
 date: 2020-04-05
 tags:

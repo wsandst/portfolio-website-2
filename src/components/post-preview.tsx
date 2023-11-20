@@ -2,12 +2,13 @@ import Avatar from './avatar'
 import DateFormatter from './date-formatter'
 import CoverImage from './cover-image'
 import Link from 'next/link'
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 type Props = {
   title: string
   cover: string
   date: string
-  description: string
+  description: MDXRemoteSerializeResult
   author: string
   slug: string
 }
@@ -37,7 +38,9 @@ const PostPreview = ({
       <div className="text-lg mb-4">
         <DateFormatter dateString={date} />
       </div>
-      <p className="text-lg leading-relaxed mb-4">{description}</p>
+      <div className="text-lg leading-relaxed mb-4">
+          <MDXRemote {...description} />
+      </div>
       <p>{author} </p>
     </div>
   )

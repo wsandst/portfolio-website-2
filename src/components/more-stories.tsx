@@ -1,5 +1,5 @@
 import PostPreview from './post-preview'
-import type Post from '../interfaces/post'
+import type Post from '../interfaces/project'
 
 type Props = {
   posts: Post[]
@@ -18,7 +18,7 @@ const MoreStories = ({ posts }: Props) => {
             title={post.title}
             cover={post.cover}
             date={post.date}
-            author={post.author}
+            author={post.authors.length == 0 ? "Me" : post.authors[0]}
             slug={post.slug}
             description={post.description}
           />

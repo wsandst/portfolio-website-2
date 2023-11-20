@@ -1,6 +1,6 @@
 ---
 title: Recognizing handwritten digits with Machine Learning
-slug: mnist
+slug: mnist-from-scratch
 cover: ./mnist-from-scratch-cover.jpg
 date: 2020-04-01
 tags:

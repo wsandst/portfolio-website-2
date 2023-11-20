@@ -1,6 +1,6 @@
 ---
 title: Magnificence 1, a UCI Chess Engine
-slug: magnificence
+slug: magnificence-1
 cover: ./magnificence-1-cover.jpg
 date: 2017-04-02
 tags:
