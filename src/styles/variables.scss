@@ -1,0 +1,37 @@
+
+:root.dark-theme {
+    --background-color: #202020;
+    --bg: #202020;
+    --bgup1: #4a4a4a;
+    --button: #575757;
+    --buttondown: #4a4a4a;
+    --hover: #353535;
+    --textLight: #979797;
+    --textNormal: hsla(0,0%,100%,.88);
+    --textTitle: #fff;
+    --textHighlight: hsla(0,0%,100%,.8);
+    --hr: hsla(0,0%,100%,.2);
+    --highlightShadow: #000;
+    --backgroundShadow: rgba(0,0,0,.6);
+    --fade: 0;
+    --textLink: #6ab0f3;
+    --textLinkHover: #4675a1;
+}
+
+:root.light-theme {
+    --bg: #fff;
+    --bgup1: #fff;
+    --button: #f2f2f2;
+    --hover: #f5f5f5;
+    --buttondown: #e6e6e6;
+    --textLight: #444;
+    --textNormal: #333;
+    --textTitle: #1a1a1a;
+    --textHighlight: #666;
+    --hr: rgba(0,0,0,.2);
+    --highlightShadow: rgba(0,0,0,.5);
+    --backgroundShadow: rgba(0,0,0,.25);
+    --fade: 0;
+    --textLink: #6ab0f3;
+    --textLinkHover: #4675a1;
+}

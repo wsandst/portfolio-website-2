@@ -1,14 +1,15 @@
-import Link from 'next/link'
+import DarkModeToggle from "./dark-mode-toggle";
 
-const Header = () => {
+function Header() : JSX.Element {
   return (
-    <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8">
-      <Link href="/" className="hover:underline">
-        Blog
-      </Link>
-      .
-    </h2>
-  )
+    <>
+        <div className="header">
+            <DarkModeToggle/>
+            <h1> Header </h1>
+        </div>
+    </>
+  );
 }
-
-export default Header
+  
+export default Header;
+  

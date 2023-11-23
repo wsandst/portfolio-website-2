@@ -1,13 +1,7 @@
-import { MDXRemoteSerializeResult } from 'next-mdx-remote';
+import AboutPageSectionContent from "./about-section-content"
 
 type AboutPageContent = {
     sections: AboutPageSectionContent[]
 }
 
-type AboutPageSectionContent = {
-    title: string,
-    image: string,
-    text: MDXRemoteSerializeResult
-}
-  
 export default AboutPageContent

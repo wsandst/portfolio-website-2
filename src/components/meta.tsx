@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { CMS_NAME, HOME_OG_IMAGE_URL } from '../lib/constants'
 
-const Meta = () => {
+function Meta() : JSX.Element {
   return (
     <Head>
       <link
@@ -41,4 +41,4 @@ const Meta = () => {
   )
 }
 
-export default Meta
+export default Meta;
