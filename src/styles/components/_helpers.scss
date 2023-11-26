@@ -1,0 +1,13 @@
+
+.nav-link {
+    all: unset;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: var(--text-normal);
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: var(--text-highlight);
+}

@@ -1,5 +1,7 @@
-@use 'variables.scss';
-@use 'components/header.scss';
+@use 'variables' as *;
+@use 'components/header';
+@use 'components/footer';
+@use 'components/helpers';
 
 html {
     width: 100%;
@@ -20,8 +22,20 @@ body {
 }
 
 #__next {
-    margin: 1em;
-    max-width: 800px;
+    min-width: 100%;
+}
+
+#main-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    max-width: $desktopMaxWidth;
+    padding-left: 27px;
+    padding-right: 27px;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 img {
@@ -33,10 +47,10 @@ a {
     color: #6ab0f3;
 }
 
-.light-theme #light-theme-toggle {
-    display: none;
+button {
+    all: unset;
 }
-
-.dark-theme #dark-theme-toggle {
-    display: none;
+  
+button:focus {
+    outline: revert;
 }

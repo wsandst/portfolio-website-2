@@ -1,11 +1,20 @@
-
+import Link from "next/link";
 
 function Footer() : JSX.Element {
   return (
-    <div>
-        <h1> Footer </h1>
-    </div>
+    <footer>
+        <div id="footer-left">
+          <Link className="nav-link" href="/about/#contact">Contact</Link>
+        </div>
+        <div id="footer-right">
+          <span> Copyright {getCurrentYear()} </span>
+        </div>
+    </footer>
   );
+}
+
+function getCurrentYear() {
+  return new Date().getFullYear();
 }
   
 export default Footer;

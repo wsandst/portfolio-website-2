@@ -16,7 +16,7 @@ export default function Index({ pinnedPosts }: Props) {
         <Head>
           <title>{`Next.js Blog Example with ${CMS_NAME}`}</title>
         </Head>
-        <h1> Hello there</h1>
+        <h1> Main content here </h1>
       </Layout>
     </>
   )

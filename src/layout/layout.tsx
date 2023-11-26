@@ -10,11 +10,13 @@ function Layout({ children }: Props) : JSX.Element {
   return (
     <>
       <Meta />
-      <Header/>
-      <div className="min-h-screen">
-        <main>{children}</main>
+      <div id="main-layout">
+        <Header/>
+        <div className="min-h-screen">
+          <main>{children}</main>
+        </div>
+        <Footer />
       </div>
-      <Footer />
     </>
   )
 }

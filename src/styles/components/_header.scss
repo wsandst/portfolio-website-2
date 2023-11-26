@@ -1,0 +1,24 @@
+@use '../variables' as *;
+
+
+.light-theme #light-theme-toggle {
+    display: none;
+}
+
+.dark-theme #dark-theme-toggle {
+    display: none;
+}
+
+header {
+    max-width: $desktopMaxWidth;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid grey;
+}
+
+#header-right {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
