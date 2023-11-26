@@ -1,10 +1,10 @@
-import DarkModeToggle from "./dark-mode-toggle";
+import ThemeToggler from "../components/theme-toggler";
 
 function Header() : JSX.Element {
   return (
     <>
         <div className="header">
-            <DarkModeToggle/>
+            <ThemeToggler/>
             <h1> Header </h1>
         </div>
     </>
@@ -12,4 +12,3 @@ function Header() : JSX.Element {
 }
   
 export default Header;
-  

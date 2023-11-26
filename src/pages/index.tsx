@@ -1,4 +1,4 @@
-import Layout from '../components/layout'
+import Layout from '../layout/layout'
 import { getProjects } from '../lib/content-api'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'

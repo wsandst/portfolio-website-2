@@ -1,4 +1,5 @@
-@use 'variables';
+@use 'variables.scss';
+@use 'components/header.scss';
 
 html {
     width: 100%;
@@ -12,10 +13,10 @@ body {
     align-items: center;
     justify-content: center;
     background-color: var(--bg);
-    color: var(--textNormal);
+    color: var(--text-normal);
     min-height: 100%;
     min-width: 100%;
-    transition: var(--fade);
+    transition: all 0.3s ease;
 }
 
 #__next {
@@ -30,4 +31,12 @@ img {
 
 a {
     color: #6ab0f3;
+}
+
+.light-theme #light-theme-toggle {
+    display: none;
+}
+
+.dark-theme #dark-theme-toggle {
+    display: none;
 }

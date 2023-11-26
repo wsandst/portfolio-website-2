@@ -1,0 +1,15 @@
+button {
+    all: unset;
+}
+  
+button:focus {
+    outline: revert;
+}
+
+.light-theme #light-theme-toggle {
+    display: none;
+}
+
+.dark-theme #dark-theme-toggle {
+    display: none;
+}

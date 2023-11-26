@@ -3,6 +3,7 @@
 function getTheme() {
     // Attempt to get the preferred theme from local storage
     let storedTheme = localStorage.getItem("theme");
+    console.log("Retrieved theme: ", storedTheme);
     if (storedTheme) {
         return storedTheme;
     }
@@ -12,3 +13,4 @@ function getTheme() {
 
 const theme = getTheme();
 document.documentElement.classList.add(theme);
+console.log("Set theme: ", document.documentElement.classList);
