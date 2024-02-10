@@ -37,7 +37,6 @@ export async function getPageContent(page: string) {
   const fullPath = join(pageContentDirectory, page + ".yml", );
   const fileContents = fs.readFileSync(fullPath, 'utf8');
   const { data, content } = matter(fileContents);
-  await serializeMdxMarkdown(data);
   return data;
 }
 

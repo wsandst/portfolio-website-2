@@ -1,9 +1,10 @@
+@use 'sass:color';
 
 $desktopMaxWidth: 1400px;
 
 :root.dark-theme {
     --bg: #0F0F0F;
-    --bg-up: lighten(#0F0F0F, 20%);
+    --bg-up: #{lighten(#0F0F0F, 15%)};
     --text-normal: hsla(0,0%,100%,.88);
     --text-title: #fff;
     --text-highlight: hsla(0,0%,100%,.8);

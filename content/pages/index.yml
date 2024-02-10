@@ -1,8 +1,8 @@
 ---
-about-heading: Hello there. I'm William
-about-text: |
+aboutHeading: Hello there. I'm William.
+aboutText: |
   I'm a self-taught full-stack developer.   
 
   You can read about my projects here.
-about-image: profile.webp
+aboutImage: profile.svg
 ---

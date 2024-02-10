@@ -2,6 +2,9 @@
 @use 'components/header';
 @use 'components/footer';
 @use 'components/helpers';
+@use 'components/projects';
+
+@use 'pages/index';
 
 html {
     width: 100%;

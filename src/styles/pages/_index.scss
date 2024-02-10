@@ -1,0 +1,36 @@
+#index-content {
+    
+}
+
+#about-short-profile {
+    position: absolute;
+    top: -10px;
+    overflow: hidden;
+    max-height: 315px;
+}
+
+#about-short-profile-icon {
+    z-index: 1;
+    position: relative;
+}
+
+#index-lower-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 120px;
+}
+
+#about-short {
+    border-bottom: 1px solid grey;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    padding-left: 30px;
+}
+
+#about-short-text {
+    white-space: pre-wrap;
+    margin-left: 230px;
+}
